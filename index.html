@@ -183,15 +183,6 @@
                     const scriptURL = 'https://script.google.com/macros/s/AKfycbycvufhMJUPCMWZwGuD1-I2JHY6NbHlC7SfXOeTsu1RyNZpkwuqtsrZh4BOHWrucSRL_A/exec';                    
                     const formContainer = document.querySelector('#rsvp-form').parentElement;
 
-                    if (scriptURL === 'https://script.google.com/macros/s/AKfycbycvufhMJUPCMWZwGuD1-I2JHY6NbHlC7SfXOeTsu1RyNZpkwuqtsrZh4BOHWrucSRL_A/exec') {
-                        formContainer.innerHTML = `
-                            <div class="text-center p-4 bg-red-100 text-red-800 rounded-md">
-                                <h3 class="font-bold text-lg">Configuration Error</h3>
-                                <p>The form is not yet connected. The website owner needs to add a Google Apps Script URL to the code.</p>
-                            </div>`;
-                        return;
-                    }
-                    
                     const formData = new FormData(rsvpForm);
                     submitButton.disabled = true;
                     submitButton.textContent = 'Submitting...';
