@@ -10,7 +10,7 @@
     
     <!-- Google Fonts: Dancing Script for headings, Lora for body -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
     <style>
@@ -41,9 +41,9 @@
         
         <!-- Header Section -->
         <header class="text-center my-8 md:my-12">
-            <h1 class="text-5xl md:text-7xl text-gray-800">David Lai</h1>
+            <h1 class="text-5xl md:text-7xl text-gray-800">[Couple's Name 1]</h1>
             <h2 class="text-4xl md:text-6xl text-gray-600">&</h2>
-            <h1 class="text-5xl md:text-7xl text-gray-800">Rebecca Chung</h1>
+            <h1 class="text-5xl md:text-7xl text-gray-800">[Couple's Name 2]</h1>
             <p class="mt-4 text-lg text-gray-500">ARE GETTING MARRIED</p>
         </header>
 
@@ -71,7 +71,6 @@
 
     <script>
         // --- Page Content Definitions ---
-        // We store the HTML for each "page" here. This makes it easy to manage.
         const pages = {
             home: `
                 <div class="page-content text-center bg-white/80 backdrop-blur-sm p-8 rounded-lg shadow-lg">
@@ -89,8 +88,6 @@
                 <div class="page-content bg-white/80 backdrop-blur-sm p-8 rounded-lg shadow-lg">
                     <h2 class="font-display text-5xl text-center text-gray-800 mb-8">Wedding Information</h2>
                     <div class="grid md:grid-cols-2 gap-8 text-center">
-                        
-                        <!-- Ceremony Details -->
                         <div class="border border-gray-200 p-6 rounded-lg">
                             <h3 class="font-display text-4xl text-rose-800 mb-3">The Ceremony</h3>
                             <p class="font-bold text-lg">[Time, e.g., 4:00 PM]</p>
@@ -98,8 +95,6 @@
                             <p>[Address Line 1]</p>
                             <p>[City, State, ZIP]</p>
                         </div>
-
-                        <!-- Reception Details -->
                         <div class="border border-gray-200 p-6 rounded-lg">
                             <h3 class="font-display text-4xl text-rose-800 mb-3">The Reception</h3>
                             <p class="font-bold text-lg">[Time, e.g., 6:00 PM onwards]</p>
@@ -108,12 +103,9 @@
                             <p>[City, State, ZIP]</p>
                         </div>
                     </div>
-
-                    <!-- Map -->
                     <div class="mt-8">
                          <h3 class="font-display text-4xl text-center text-rose-800 mb-4">Location</h3>
                          <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-md">
-                            <!-- Replace this with your actual Google Maps embed iframe -->
                             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.817684034899!2d103.8519558153437!3d1.286920362145785!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da190859265939%3A0x800845a89a31a4f!2sMerlion!5e0!3m2!1sen!2ssg!4v1663046587693!5m2!1sen!2ssg" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                          </div>
                     </div>
@@ -123,16 +115,12 @@
                 <div class="page-content bg-white/80 backdrop-blur-sm p-8 rounded-lg shadow-lg max-w-2xl mx-auto">
                     <h2 class="font-display text-5xl text-center text-gray-800 mb-6">RSVP</h2>
                     <p class="text-center text-gray-600 mb-8">Please let us know if you can make it by [RSVP Deadline].</p>
-                    
                     <form id="rsvp-form">
                         <div class="space-y-6">
-                            <!-- Names -->
                             <div>
                                 <label for="names" class="block text-sm font-medium text-gray-700 mb-1">Full Name(s)</label>
                                 <input type="text" id="names" name="names" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-rose-500 focus:border-rose-500">
                             </div>
-
-                            <!-- Attendance -->
                             <div>
                                 <span class="block text-sm font-medium text-gray-700 mb-2">Will you be attending?</span>
                                 <div class="flex items-center space-x-6">
@@ -146,15 +134,11 @@
                                     </label>
                                 </div>
                             </div>
-                            
-                            <!-- Message -->
                             <div>
                                 <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Leave a message for the couple (optional)</label>
                                 <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-rose-500 focus:border-rose-500"></textarea>
                             </div>
                         </div>
-
-                        <!-- Submit Button -->
                         <div class="text-center mt-8">
                             <button type="submit" class="bg-rose-600 text-white font-bold px-8 py-3 rounded-full hover:bg-rose-700 transition-transform transform hover:scale-105 duration-300">
                                 Submit RSVP
@@ -162,7 +146,7 @@
                         </div>
                     </form>
                     <div id="rsvp-confirmation" class="hidden text-center mt-8 p-4 bg-green-100 text-green-800 rounded-md">
-                        Thank you for your response!
+                        Thank you for your response! We can't wait to celebrate with you.
                     </div>
                 </div>
             `
@@ -173,16 +157,11 @@
         const navLinks = document.querySelectorAll('.nav-link');
 
         function loadPage(pageName) {
-            // Check if the page exists, otherwise default to home
             const content = pages[pageName] || pages.home;
             mainContent.innerHTML = content;
-            
-            // If the loaded page is the RSVP page, attach the form handler
             if (pageName === 'rsvp') {
                 attachRsvpFormHandler();
             }
-
-            // Update active link style
             navLinks.forEach(link => {
                 link.classList.remove('bg-rose-100', 'text-rose-800', 'font-bold');
                 if (link.getAttribute('href') === `#${pageName}`) {
@@ -191,24 +170,55 @@
             });
         }
 
-        // --- RSVP Form Handler ---
+        // --- RSVP Form Handler (Updated) ---
         function attachRsvpFormHandler() {
             const rsvpForm = document.getElementById('rsvp-form');
             const confirmationMessage = document.getElementById('rsvp-confirmation');
-            if (rsvpForm) {
-                rsvpForm.addEventListener('submit', function(event) {
-                    event.preventDefault(); // Prevent actual form submission
-                    
-                    // In a real application, you would send this data to a server,
-                    // a Google Sheet via a service like Formspree, or a serverless function.
-                    const formData = new FormData(rsvpForm);
-                    const name = formData.get('names');
-                    const attendance = formData.get('attendance');
-                    console.log(`RSVP from ${name}, Attending: ${attendance}`);
+            const submitButton = rsvpForm ? rsvpForm.querySelector('button[type="submit"]') : null;
 
-                    // Hide the form and show the confirmation message
-                    rsvpForm.style.display = 'none';
-                    confirmationMessage.classList.remove('hidden');
+            if (rsvpForm && submitButton) {
+                rsvpForm.addEventListener('submit', function(event) {
+                    event.preventDefault();
+
+                    const scriptURL = 'https://script.google.com/macros/s/AKfycbycvufhMJUPCMWZwGuD1-I2JHY6NbHlC7SfXOeTsu1RyNZpkwuqtsrZh4BOHWrucSRL_A/exec';                    
+                    const formContainer = document.querySelector('#rsvp-form').parentElement;
+
+                    if (scriptURL === 'https://script.google.com/macros/s/AKfycbycvufhMJUPCMWZwGuD1-I2JHY6NbHlC7SfXOeTsu1RyNZpkwuqtsrZh4BOHWrucSRL_A/exec') {
+                        formContainer.innerHTML = `
+                            <div class="text-center p-4 bg-red-100 text-red-800 rounded-md">
+                                <h3 class="font-bold text-lg">Configuration Error</h3>
+                                <p>The form is not yet connected. The website owner needs to add a Google Apps Script URL to the code.</p>
+                            </div>`;
+                        return;
+                    }
+                    
+                    const formData = new FormData(rsvpForm);
+                    submitButton.disabled = true;
+                    submitButton.textContent = 'Submitting...';
+
+                    fetch(scriptURL, { method: 'POST', body: formData })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.result === 'success') {
+                                rsvpForm.style.display = 'none';
+                                confirmationMessage.classList.remove('hidden');
+                            } else {
+                                throw new Error(data.error || 'Unknown error from Google Script.');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error!', error.message);
+                            submitButton.disabled = false;
+                            submitButton.textContent = 'Submit RSVP';
+                            
+                            let errorMessageDiv = rsvpForm.querySelector('.error-message');
+                            if (!errorMessageDiv) {
+                                errorMessageDiv = document.createElement('div');
+                                errorMessageDiv.className = 'error-message text-center mt-4 p-4 bg-red-100 text-red-800 rounded-md';
+                                rsvpForm.appendChild(errorMessageDiv);
+                            }
+                            errorMessageDiv.textContent = 'Oops! There was a problem submitting your RSVP. Please try again later.';
+                        });
                 });
             }
         }
@@ -217,23 +227,19 @@
         function handleNavigation(event) {
             event.preventDefault();
             const pageName = event.target.getAttribute('href').substring(1);
-            // Update URL hash
             window.location.hash = pageName;
         }
 
-        // Listen for clicks on nav links
         navLinks.forEach(link => {
             link.addEventListener('click', handleNavigation);
         });
 
-        // Listen for hash changes (e.g., back/forward buttons)
         window.addEventListener('hashchange', () => {
             const pageName = window.location.hash.substring(1) || 'home';
             loadPage(pageName);
         });
 
         // --- Initial Page Load ---
-        // Load page based on initial URL hash, or default to home
         const initialPage = window.location.hash.substring(1) || 'home';
         loadPage(initialPage);
 
