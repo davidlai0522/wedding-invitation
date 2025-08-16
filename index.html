@@ -33,28 +33,19 @@
     </style>
 </head>
 <body class="text-gray-700 antialiased">
-
     <!-- Background Image Container -->
     <div class="fixed inset-0 z-[-1] bg-cover bg-center opacity-10" style="background-image: url('https://placehold.co/1920x1080/FDFBF8/E2D9D4?text=Floral+Background');"></div>
 
     <div class="container mx-auto p-4 max-w-4xl">
-        
         <!-- Header Section -->
-        <header class="text-center my-8 md:my-12">
-            <h1 class="text-5xl md:text-7xl text-gray-800">[Couple's Name 1]</h1>
-            <h2 class="text-4xl md:text-6xl text-gray-600">&</h2>
-            <h1 class="text-5xl md:text-7xl text-gray-800">[Couple's Name 2]</h1>
-            <p class="mt-4 text-lg text-gray-500">ARE GETTING MARRIED</p>
-        </header>
+        <div id="app-header">
+            <!-- Header content will be loaded here by JavaScript -->
+        </div>
 
         <!-- Navigation -->
-        <nav class="bg-white/80 backdrop-blur-sm shadow-md rounded-full sticky top-4 z-10 max-w-md mx-auto">
-            <ul class="flex justify-center items-center p-2 space-x-2 md:space-x-6">
-                <li><a href="#home" class="nav-link px-4 py-2 rounded-full transition-colors duration-300 hover:bg-rose-100 hover:text-rose-800">Home</a></li>
-                <li><a href="#info" class="nav-link px-4 py-2 rounded-full transition-colors duration-300 hover:bg-rose-100 hover:text-rose-800">Info</a></li>
-                <li><a href="#rsvp" class="nav-link px-4 py-2 rounded-full transition-colors duration-300 hover:bg-rose-100 hover:text-rose-800">RSVP</a></li>
-            </ul>
-        </nav>
+        <div id="app-nav">
+            <!-- Navigation content will be loaded here by JavaScript -->
+        </div>
 
         <!-- Main Content Area -->
         <main id="main-content" class="mt-10">
@@ -62,178 +53,12 @@
         </main>
 
         <!-- Footer -->
-        <footer class="text-center mt-12 py-6 border-t border-gray-200">
-            <p class="text-gray-500">Made with love</p>
-            <p class="font-display text-2xl mt-2 text-gray-600">[Couple's Names]</p>
-        </footer>
-
+        <div id="app-footer">
+            <!-- Footer content will be loaded here by JavaScript -->
+        </div>
     </div>
 
-    <script>
-        // --- Page Content Definitions ---
-        const pages = {
-            home: `
-                <div class="page-content text-center bg-white/80 backdrop-blur-sm p-8 rounded-lg shadow-lg">
-                    <img src="https://placehold.co/800x500/E2D9D4/4A3F35?text=Our+Favorite+Photo" alt="Couple's Photo" class="rounded-lg shadow-md mx-auto mb-8 w-full max-w-lg">
-                    <h2 class="font-display text-5xl text-gray-800 mb-4">Join Us For Our Wedding</h2>
-                    <p class="text-2xl text-gray-600 mb-2">[Wedding Date, e.g., Saturday, October 26, 2026]</p>
-                    <p class="text-xl text-gray-500">[City, State]</p>
-                    <div class="mt-8 text-lg max-w-2xl mx-auto">
-                        <p>We are so excited to celebrate our special day with our family and friends. This website contains wedding day details, travel information, and much more.</p>
-                        <p class="mt-4">Please don't forget to RSVP by [RSVP Deadline]!</p>
-                    </div>
-                </div>
-            `,
-            info: `
-                <div class="page-content bg-white/80 backdrop-blur-sm p-8 rounded-lg shadow-lg">
-                    <h2 class="font-display text-5xl text-center text-gray-800 mb-8">Wedding Information</h2>
-                    <div class="grid md:grid-cols-2 gap-8 text-center">
-                        <div class="border border-gray-200 p-6 rounded-lg">
-                            <h3 class="font-display text-4xl text-rose-800 mb-3">The Ceremony</h3>
-                            <p class="font-bold text-lg">[Time, e.g., 4:00 PM]</p>
-                            <p>[Venue Name, e.g., The Grand Cathedral]</p>
-                            <p>[Address Line 1]</p>
-                            <p>[City, State, ZIP]</p>
-                        </div>
-                        <div class="border border-gray-200 p-6 rounded-lg">
-                            <h3 class="font-display text-4xl text-rose-800 mb-3">The Reception</h3>
-                            <p class="font-bold text-lg">[Time, e.g., 6:00 PM onwards]</p>
-                            <p>[Venue Name, e.g., The Crystal Ballroom]</p>
-                            <p>[Address Line 1]</p>
-                            <p>[City, State, ZIP]</p>
-                        </div>
-                    </div>
-                    <div class="mt-8">
-                         <h3 class="font-display text-4xl text-center text-rose-800 mb-4">Location</h3>
-                         <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-md">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.817684034899!2d103.8519558153437!3d1.286920362145785!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da190859265939%3A0x800845a89a31a4f!2sMerlion!5e0!3m2!1sen!2ssg!4v1663046587693!5m2!1sen!2ssg" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                         </div>
-                    </div>
-                </div>
-            `,
-            rsvp: `
-                <div class="page-content bg-white/80 backdrop-blur-sm p-8 rounded-lg shadow-lg max-w-2xl mx-auto">
-                    <h2 class="font-display text-5xl text-center text-gray-800 mb-6">RSVP</h2>
-                    <p class="text-center text-gray-600 mb-8">Please let us know if you can make it by [RSVP Deadline].</p>
-                    <form id="rsvp-form">
-                        <div class="space-y-6">
-                            <div>
-                                <label for="names" class="block text-sm font-medium text-gray-700 mb-1">Full Name(s)</label>
-                                <input type="text" id="names" name="names" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-rose-500 focus:border-rose-500">
-                            </div>
-                            <div>
-                                <span class="block text-sm font-medium text-gray-700 mb-2">Will you be attending?</span>
-                                <div class="flex items-center space-x-6">
-                                    <label class="flex items-center">
-                                        <input type="radio" name="attendance" value="yes" class="h-4 w-4 text-rose-600 border-gray-300 focus:ring-rose-500" required>
-                                        <span class="ml-2">Joyfully Accept</span>
-                                    </label>
-                                    <label class="flex items-center">
-                                        <input type="radio" name="attendance" value="no" class="h-4 w-4 text-rose-600 border-gray-300 focus:ring-rose-500">
-                                        <span class="ml-2">Regretfully Decline</span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div>
-                                <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Leave a message for the couple (optional)</label>
-                                <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-rose-500 focus:border-rose-500"></textarea>
-                            </div>
-                        </div>
-                        <div class="text-center mt-8">
-                            <button type="submit" class="bg-rose-600 text-white font-bold px-8 py-3 rounded-full hover:bg-rose-700 transition-transform transform hover:scale-105 duration-300">
-                                Submit RSVP
-                            </button>
-                        </div>
-                    </form>
-                    <div id="rsvp-confirmation" class="hidden text-center mt-8 p-4 bg-green-100 text-green-800 rounded-md">
-                        Thank you for your response! We can't wait to celebrate with you.
-                    </div>
-                </div>
-            `
-        };
-
-        // --- Router and Page Loading Logic ---
-        const mainContent = document.getElementById('main-content');
-        const navLinks = document.querySelectorAll('.nav-link');
-
-        function loadPage(pageName) {
-            const content = pages[pageName] || pages.home;
-            mainContent.innerHTML = content;
-            if (pageName === 'rsvp') {
-                attachRsvpFormHandler();
-            }
-            navLinks.forEach(link => {
-                link.classList.remove('bg-rose-100', 'text-rose-800', 'font-bold');
-                if (link.getAttribute('href') === `#${pageName}`) {
-                    link.classList.add('bg-rose-100', 'text-rose-800', 'font-bold');
-                }
-            });
-        }
-
-        // --- RSVP Form Handler (Updated) ---
-        function attachRsvpFormHandler() {
-            const rsvpForm = document.getElementById('rsvp-form');
-            const confirmationMessage = document.getElementById('rsvp-confirmation');
-            const submitButton = rsvpForm ? rsvpForm.querySelector('button[type="submit"]') : null;
-
-            if (rsvpForm && submitButton) {
-                rsvpForm.addEventListener('submit', function(event) {
-                    event.preventDefault();
-
-                    const scriptURL = 'https://script.google.com/macros/s/AKfycbycvufhMJUPCMWZwGuD1-I2JHY6NbHlC7SfXOeTsu1RyNZpkwuqtsrZh4BOHWrucSRL_A/exec';                    
-                    const formContainer = document.querySelector('#rsvp-form').parentElement;
-
-                    const formData = new FormData(rsvpForm);
-                    submitButton.disabled = true;
-                    submitButton.textContent = 'Submitting...';
-
-                    fetch(scriptURL, { method: 'POST', body: formData })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.result === 'success') {
-                                rsvpForm.style.display = 'none';
-                                confirmationMessage.classList.remove('hidden');
-                            } else {
-                                throw new Error(data.error || 'Unknown error from Google Script.');
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error!', error.message);
-                            submitButton.disabled = false;
-                            submitButton.textContent = 'Submit RSVP';
-                            
-                            let errorMessageDiv = rsvpForm.querySelector('.error-message');
-                            if (!errorMessageDiv) {
-                                errorMessageDiv = document.createElement('div');
-                                errorMessageDiv.className = 'error-message text-center mt-4 p-4 bg-red-100 text-red-800 rounded-md';
-                                rsvpForm.appendChild(errorMessageDiv);
-                            }
-                            errorMessageDiv.textContent = 'Oops! There was a problem submitting your RSVP. Please try again later.';
-                        });
-                });
-            }
-        }
-
-        // --- Navigation Handling ---
-        function handleNavigation(event) {
-            event.preventDefault();
-            const pageName = event.target.getAttribute('href').substring(1);
-            window.location.hash = pageName;
-        }
-
-        navLinks.forEach(link => {
-            link.addEventListener('click', handleNavigation);
-        });
-
-        window.addEventListener('hashchange', () => {
-            const pageName = window.location.hash.substring(1) || 'home';
-            loadPage(pageName);
-        });
-
-        // --- Initial Page Load ---
-        const initialPage = window.location.hash.substring(1) || 'home';
-        loadPage(initialPage);
-
-    </script>
+    <!-- JavaScript -->
+    <script src="js/app.js" type="module"></script>
 </body>
 </html>
