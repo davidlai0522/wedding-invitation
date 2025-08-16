@@ -1,4 +1,4 @@
-// --- Page Loading Logic ---
+// --- Component and Page Loading ---
 async function loadComponent(componentName) {
     try {
         const response = await fetch(`components/${componentName}.html`);
@@ -73,21 +73,38 @@ let currentPage = 'home';
 async function updateActiveNav() {
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
-        link.classList.remove('bg-rose-100', 'text-rose-800', 'font-bold');
+        link.classList.remove('text-rose-600', 'font-semibold');
         if (link.getAttribute('href') === `#${currentPage}`) {
-            link.classList.add('bg-rose-100', 'text-rose-800', 'font-bold');
+            link.classList.add('text-rose-600', 'font-semibold');
         }
     });
 }
 
-async function renderPage(pageName) {
+// --- Scroll Handling ---
+function setupScrollListener() {
+    const nav = document.getElementById('main-nav');
+    if (!nav) return;
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            nav.classList.add('shadow-lg', 'bg-white/95');
+            nav.classList.remove('bg-white/90');
+        } else {
+            nav.classList.remove('shadow-lg', 'bg-white/95');
+            nav.classList.add('bg-white/90');
+        }
+    });
+}
+
+// --- Page Loading Logic ---
+async function loadPage(pageName) {
     const mainContent = document.getElementById('main-content');
     if (!mainContent) return;
 
     currentPage = pageName || 'home';
     
     // Show loading state
-    mainContent.innerHTML = '<div class="text-center p-8">Loading...</div>';
+    mainContent.innerHTML = '<div class="text-center p-12">Loading...</div>';
     
     try {
         // Load and render the page content
@@ -96,6 +113,24 @@ async function renderPage(pageName) {
         
         // Update navigation
         await updateActiveNav();
+        
+        // If it's the home page, scroll to top
+        if (currentPage === 'home') {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        } else {
+            // Scroll to main content area with offset for fixed header
+            const headerOffset = document.getElementById('main-nav').offsetHeight;
+            const elementPosition = mainContent.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset - 20;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
         
         // Attach event listeners if needed
         if (currentPage === 'rsvp') {
