@@ -163,7 +163,7 @@ function setupEventListeners() {
     window.addEventListener('popstate', () => {
         const pageName = window.location.hash.substring(1) || 'home';
         if (pageName !== currentPage) {
-            renderPage(pageName);
+            loadPage(pageName);
         }
     });
 }
@@ -184,7 +184,7 @@ async function initApp() {
     
     // Load initial page
     const initialPage = window.location.hash.substring(1) || 'home';
-    await renderPage(initialPage);
+    await loadPage(initialPage);
 }
 
 // Start the app when the DOM is fully loaded
