@@ -181,6 +181,7 @@ async function initApp() {
     
     // Setup event listeners
     setupEventListeners();
+    setupScrollListener();
     
     // Load initial page
     const initialPage = window.location.hash.substring(1) || 'home';
