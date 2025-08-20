@@ -1,50 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>You're Invited! - [Couple's Names]</title>
     <link rel="icon" href="data:,">
-    
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
 
     <style>
         /* Custom styles to apply the fonts */
         body {
             font-family: 'Lora', serif;
-            background-color: #FDFBF8; /* Soft off-white background */
+            background-color: #FDFBF8;
+            /* Soft off-white background */
             scroll-behavior: smooth;
         }
-        h1, h2, h3, h4, h5, h6, .font-display {
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        .font-display {
             font-family: 'Dancing Script', cursive;
         }
-        
+
         /* Animations */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        
+
         .animate-fade-in {
             animation: fadeIn 0.6s ease-out forwards;
         }
-        
+
         /* Smooth transitions */
         .transition-all {
             transition: all 0.3s ease-in-out;
         }
-        
+
         /* Navigation hover effect */
         .nav-link {
             position: relative;
         }
-        
+
         .nav-link:after {
             content: '';
             position: absolute;
@@ -52,21 +70,22 @@
             height: 2px;
             bottom: 0;
             left: 50%;
-            background-color: #e11d48; /* rose-600 */
+            background-color: #e11d48;
+            /* rose-600 */
             transition: all 0.3s ease-in-out;
             transform: translateX(-50%);
         }
-        
+
         .nav-link:hover:after,
         .nav-link.text-rose-600:after {
             width: 60%;
         }
-        
+
         /* Hero section */
         .hero {
             background-attachment: fixed;
         }
-        
+
         @media (max-width: 768px) {
             .hero {
                 background-attachment: scroll;
@@ -74,11 +93,16 @@
         }
     </style>
 </head>
+
 <body class="text-gray-700 antialiased bg-[#ebe8e1]">
     <!-- Main Section -->
-    <section class="relative h-[80vh] flex items-center justify-center bg-cover bg-center" style="background-image: url('assets/home_page/img1.jpg');">
-        <div class="relative z-10 text-center text-white px-4 animate-fade-in -mt-80">
-            <h1 class="font-['Libre_Baskerville'] font mb-4 text-[#36350b]" style="font-size:62px;">DAVID & REBECCA</h1>
+    <section class="relative">
+        <img src="assets/home_page/img1.jpg" alt="David and Rebecca" class="block w-full h-auto">
+
+        <div class="absolute inset-0 flex justify-center items-start">
+            <div class="absolute top-1/4 -translate-x-1/2 z-10 text-center px-4 animate-fade-in">
+                <h1 class="font-['Libre_Baskerville'] mb-4 text-[#36350b]" style="font-size:clamp(2rem,8vw,5rem);">DAVID & REBECCA</h1>
+            </div>
         </div>
     </section>
 
@@ -97,4 +121,5 @@
     <!-- JavaScript -->
     <script src="js/app.js" type="module"></script>
 </body>
+
 </html>
