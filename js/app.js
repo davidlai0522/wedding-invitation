@@ -71,12 +71,10 @@ function attachRsvpFormHandler() {
 let currentPage = 'home';
 
 async function updateActiveNav() {
-    const navLinks = document.querySelectorAll('.nav-link');
-    navLinks.forEach(link => {
-        link.classList.remove('text-rose-600', 'font-semibold');
-        if (link.getAttribute('href') === `#${currentPage}`) {
-            link.classList.add('text-rose-600', 'font-semibold');
-        }
+    document.querySelectorAll('.nav-link').forEach(link => {
+        const linkPage = link.getAttribute('data-page') || link.getAttribute('href').substring(1);
+        link.classList.toggle('text-rose-600', linkPage === currentPage);
+        link.classList.toggle('font-medium', linkPage === currentPage);
     });
 }
 
@@ -87,11 +85,11 @@ function setupScrollListener() {
 
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
-            nav.classList.add('shadow-lg', 'bg-white/95');
-            nav.classList.remove('bg-white/90');
+            nav.classList.add('shadow-lg', 'bg-[#ebe8e1]');
+            nav.classList.remove('bg-[#ebe8e1]/90');
         } else {
-            nav.classList.remove('shadow-lg', 'bg-white/95');
-            nav.classList.add('bg-white/90');
+            nav.classList.remove('shadow-lg', 'bg-[#ebe8e1]');
+            nav.classList.add('bg-[#ebe8e1]/90');
         }
     });
 }
@@ -114,23 +112,42 @@ async function loadPage(pageName) {
         // Update navigation
         await updateActiveNav();
         
-        // If it's the home page, scroll to top
-        if (currentPage === 'home') {
+        // Simple scroll behavior that doesn't depend on navigation element
+        const scrollToTop = () => {
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
             });
-        } else {
-            // Scroll to main content area with offset for fixed header
-            const headerOffset = document.getElementById('main-nav').offsetHeight;
-            const elementPosition = mainContent.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset - 20;
+        };
 
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
-        }
+        // Use setTimeout to ensure any pending DOM updates are complete
+        setTimeout(() => {
+            try {
+                if (currentPage === 'home') {
+                    scrollToTop();
+                } else {
+                    // Try to find any header element for offset calculation
+                    const header = document.querySelector('header');
+                    const headerHeight = header ? header.offsetHeight : 0;
+                    
+                    // Calculate position with a small offset for better visibility
+                    const elementPosition = mainContent.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerHeight - 20;
+
+                    // Ensure we don't get negative positions
+                    const safePosition = Math.max(0, offsetPosition);
+                    
+                    window.scrollTo({
+                        top: safePosition,
+                        behavior: 'smooth'
+                    });
+                }
+            } catch (error) {
+                console.error('Error during scroll handling:', error);
+                // Fallback to basic scroll behavior
+                mainContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }, 50); // Small delay to ensure DOM is ready
         
         // Attach event listeners if needed
         if (currentPage === 'rsvp') {
@@ -154,8 +171,13 @@ function setupEventListeners() {
         const link = event.target.closest('.nav-link');
         if (link) {
             event.preventDefault();
-            const pageName = link.getAttribute('href').substring(1);
-            window.location.hash = pageName;
+            const pageName = link.getAttribute('data-page') || link.getAttribute('href').substring(1);
+            if (pageName && pageName !== currentPage) {
+                window.location.hash = pageName;
+                currentPage = pageName;
+                await loadPage(pageName);
+                updateActiveNav();
+            }
         }
     });
 
@@ -170,22 +192,36 @@ function setupEventListeners() {
 
 // --- Initialize App ---
 async function initApp() {
-    // Load components
-    const header = document.getElementById('app-header');
-    const nav = document.getElementById('app-nav');
-    const footer = document.getElementById('app-footer');
-    
-    if (header) header.innerHTML = await loadComponent('header');
-    if (nav) nav.innerHTML = await loadComponent('nav');
-    if (footer) footer.innerHTML = await loadComponent('footer');
-    
-    // Setup event listeners
-    setupEventListeners();
-    setupScrollListener();
-    
-    // Load initial page
-    const initialPage = window.location.hash.substring(1) || 'home';
-    await loadPage(initialPage);
+    try {
+        // Load components
+        const [footer, nav] = await Promise.all([
+            loadComponent('footer'),
+            loadComponent('nav')
+        ]);
+        
+        // Insert components into the DOM
+        const footerElement = document.getElementById('app-footer');
+        const navElement = document.getElementById('nav-container');
+        
+        if (footerElement) footerElement.innerHTML = footer;
+        if (navElement) navElement.innerHTML = nav;
+        
+        // Set up event listeners
+        setupEventListeners();
+        
+        // Load the initial page based on the URL hash
+        const initialPage = window.location.hash.substring(1) || 'home';
+        currentPage = initialPage;
+        await loadPage(initialPage);
+        
+        // Update active navigation link
+        updateActiveNav();
+        
+        // Setup scroll listener
+        setupScrollListener();
+    } catch (error) {
+        console.error('Error initializing app:', error);
+    }
 }
 
 // Start the app when the DOM is fully loaded

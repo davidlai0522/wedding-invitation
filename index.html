@@ -17,12 +17,14 @@
         href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,700;1,400&display=swap"
         rel="stylesheet">
 
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Libre+Baskerville:ital@0;1&display=swap" rel="stylesheet">
+
     <style>
         /* Custom styles to apply the fonts */
         body {
             font-family: 'Lora', serif;
-            background-color: #FDFBF8;
-            /* Soft off-white background */
+            background-color: #ebe8e1;
+            /* Beige background */
             scroll-behavior: smooth;
         }
 
@@ -95,19 +97,24 @@
 </head>
 
 <body class="text-gray-700 antialiased bg-[#ebe8e1]">
+    <!-- Navigation -->
+    <div id="nav-container">
+        <!-- Navigation will be loaded here by JavaScript -->
+    </div>
+
     <!-- Main Section -->
     <section class="relative">
         <img src="assets/home_page/img1.jpg" alt="David and Rebecca" class="block w-full h-auto">
 
         <div class="absolute inset-0 flex justify-center items-start">
             <div class="absolute top-1/4 -translate-x-1/2 z-10 text-center px-4 animate-fade-in">
-                <h1 class="font-['Libre_Baskerville'] mb-4 text-[#36350b]" style="font-size:clamp(2rem,8vw,5rem);">DAVID & REBECCA</h1>
+                <h1 class="font-['Libre_Baskerville'] mb-4 text-[#36350b] whitespace-nowrap" style="font-size:clamp(1.2rem,5vw,5rem);">DAVID & REBECCA</h1>
             </div>
         </div>
     </section>
 
     <!-- Main Content Area -->
-    <main id="main-content" class="container mx-auto px-4 max-w-4xl">
+    <main id="main-content" class="px-0 max-w-none">
         <!-- Page content will be loaded here by JavaScript -->
     </main>
 
