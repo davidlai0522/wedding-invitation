@@ -76,13 +76,13 @@ async function updateActiveNav() {
         const isActive = linkPage === currentPage;
         
         if (isActive) {
-            // Active page: rose background with white text
-            link.classList.add('bg-rose-600', 'text-white');
-            link.classList.remove('bg-[#ebe8e1]', 'text-gray-700');
+            // Active page: rose text with underline, beige background
+            link.classList.add('text-rose-600', 'bg-[#ebe8e1]');
+            link.classList.remove('text-white', 'text-black', 'text-gray-700', 'bg-rose-600');
         } else {
-            // Inactive page: beige background with gray text
-            link.classList.add('bg-[#ebe8e1]', 'text-gray-700');
-            link.classList.remove('bg-rose-600', 'text-white');
+            // Inactive page: black text, beige background
+            link.classList.add('text-black', 'bg-[#ebe8e1]');
+            link.classList.remove('text-rose-600', 'text-white', 'text-gray-700', 'bg-rose-600');
         }
     });
 }
