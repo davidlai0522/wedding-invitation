@@ -73,8 +73,17 @@ let currentPage = 'home';
 async function updateActiveNav() {
     document.querySelectorAll('.nav-link').forEach(link => {
         const linkPage = link.getAttribute('data-page') || link.getAttribute('href').substring(1);
-        link.classList.toggle('text-rose-600', linkPage === currentPage);
-        link.classList.toggle('font-medium', linkPage === currentPage);
+        const isActive = linkPage === currentPage;
+        
+        if (isActive) {
+            // Active page: rose background with white text
+            link.classList.add('bg-rose-600', 'text-white');
+            link.classList.remove('bg-[#ebe8e1]', 'text-gray-700');
+        } else {
+            // Inactive page: beige background with gray text
+            link.classList.add('bg-[#ebe8e1]', 'text-gray-700');
+            link.classList.remove('bg-rose-600', 'text-white');
+        }
     });
 }
 
@@ -125,27 +134,11 @@ async function loadPage(pageName) {
             try {
                 if (currentPage === 'home') {
                     scrollToTop();
-                } else {
-                    // Try to find any header element for offset calculation
-                    const header = document.querySelector('header');
-                    const headerHeight = header ? header.offsetHeight : 0;
-                    
-                    // Calculate position with a small offset for better visibility
-                    const elementPosition = mainContent.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - headerHeight - 20;
-
-                    // Ensure we don't get negative positions
-                    const safePosition = Math.max(0, offsetPosition);
-                    
-                    window.scrollTo({
-                        top: safePosition,
-                        behavior: 'smooth'
-                    });
                 }
+                // Removed auto-scrolling for RSVP and other pages
             } catch (error) {
                 console.error('Error during scroll handling:', error);
-                // Fallback to basic scroll behavior
-                mainContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // Fallback: do nothing instead of auto-scrolling
             }
         }, 50); // Small delay to ensure DOM is ready
         

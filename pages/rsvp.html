@@ -1,52 +1,100 @@
-<div class="page-content bg-[#ebe8e1] backdrop-blur-sm p-8 rounded-lg shadow-lg max-w-2xl mx-auto">
-    <h2 class="font-display text-5xl text-center text-gray-800 mb-8">Wedding Information & RSVP</h2>
+<!-- Hero Section -->
+<section class="relative">
+    <img src="assets/rsvp_page/img11.jpg" alt="David and Rebecca" class="block w-full h-auto">
+</section>
 
-    <div class="bg-[#ebe8e1] grid md:grid-cols-2 gap-8 text-center mb-8">
-        <div class="border border-gray-200 p-6 rounded-lg">
-            <h3 class="font-display text-4xl text-rose-800 mb-3">The Ceremony</h3>
-            <p class="font-bold text-lg">[Time, e.g., 4:00 PM]</p>
-            <p>[Venue Name, e.g., The Grand Cathedral]</p>
-            <p>[Address Line 1]</p>
-            <p>[City, State, ZIP]</p>
+<div class="page-content bg-[#ebe8e1] backdrop-blur-sm p-8 rounded-lg max-w-2xl mx-auto">
+    <h2 class="font-['Libre_Baskerville'] text-3xl text-center text-[#482127] mb-8">11 JULY 2026</h2>
+
+    <div class="grid grid-cols-2 gap-4 sm:gap-8 text-center mb-8">
+        <div class="border-2 border-[#482127] p-4 sm:p-6 rounded-lg">
+            <h3 class="font-['Libre_Baskerville'] text-2xl sm:text-3xl md:text-4xl text-[#482127]-800 mb-3">Wedding
+                Ceremony</h3>
+            <p class="font-bold text-sm sm:text-base lg:text-lg text-[#482127]">9: 15 AM - 10:30 AM</p>
+            <p class="text-[10px] italic sm:text-xs lg:text-sm whitespace-nowrap text-[#482127]">(Sitting begins at 8:15
+                am)</p>
+            <p class="font-bold text-xs sm:text-sm lg:text-base text-[#482127]"><br />St. Mary’s Cathedral <br />Kuala
+                Lumpur</p>
         </div>
-        <div class="border border-gray-200 p-6 rounded-lg">
-            <h3 class="font-display text-4xl text-rose-800 mb-3">The Reception</h3>
-            <p class="font-bold text-lg">[Time, e.g., 6:00 PM onwards]</p>
-            <p>[Venue Name, e.g., The Crystal Ballroom]</p>
-            <p>[Address Line 1]</p>
-            <p>[City, State, ZIP]</p>
+        <div class="border-2 border-[#482127] p-4 sm:p-6 rounded-lg">
+            <h3 class="font-['Libre_Baskerville'] text-2xl sm:text-3xl md:text-4xl text-[#482127]-800 mb-3">Lunch
+                Reception</h3>
+            <p class="font-bold text-sm sm:text-base lg:text-lg text-[#482127]">12:30 PM - 3:00 PM</p>
+            <p class="text-[10px] italic sm:text-xs lg:text-sm whitespace-nowrap text-[#482127]">(Registration begins at
+                11:30 am)</p>
+            <p class="font-bold text-xs sm:text-sm lg:text-base text-[#482127]"><br />Concorde Ballroom, <br /> Concorde
+                Hotel<br />Kuala Lumpur</p>
         </div>
     </div>
 
-    <div class="page-content bg-[#ebe8e1] backdrop-blur-sm p-8 rounded-lg shadow-lg max-w-2xl mx-auto">
-        <h2 class="font-display text-5xl text-center text-gray-800 mb-6">RSVP</h2>
+    <!-- Important Notes Section -->
+    <div class="bg-[#ebe8e1] p-6 rounded-lg mb-8 max-w-2xl mx-auto">
+        <h2 class="font-['Libre_Baskerville'] text-2xl sm:text-3xl text-center text-gray-800 mb-6">IMPORTANT NOTE</h2>
+        <div class="text-center text-[#482127] space-y-2">
+            <div class="text-left font-['Libre_Baskerville']">
+                <p class="font-bold underline mb-2">Time Etiquette</p>
+                <p class="text-xs sm:text-sm md:text-base">Our wedding ceremony will begin promptly at <b>9:15 am</b>.
+                    We kindly ask that guests arrive at least 20
+                    minutes beforehand. To preserve the solemnity of the procession, latecomers will be seated only
+                    after the bridal entrance.</p>
+            </div>
+            <div class="text-left font-['Libre_Baskerville']">
+                <p class="font-bold underline mb-2">Children</p>
+                <p class="text-xs sm:text-sm md:text-base">To help maintain a quiet and reverent atmosphere, we kindly
+                    ask that little ones <b>aged 5 and below</b> to
+                    not attend the ceremony. We are deeply grateful for your understanding.</p>
+            </div>
+            <div class="text-left font-['Libre_Baskerville']">
+                <p class="font-bold underline mb-2">Plus Ones</p>
+                <p class="text-xs sm:text-sm md:text-base">Due to limited seating, invitations are extended only to
+                    those listed on the invitation along with
+                    their spouses and children. If you would like to bring a guest, please kindly reach out to us.</p>
+            </div>
+            <div class="text-left font-['Libre_Baskerville']">
+                <p class="font-bold underline mb-2">Shuttle service</p>
+                <p class="text-xs sm:text-sm md:text-base">Shuttle buses will be provided from <b>St. Mary’s Cathedral
+                        to Concorde Hotel</b> for the lunch
+                    reception.
+                    Please let us know in your RSVP if you would like to use this service.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-content bg-[#ebe8e1] backdrop-blur-sm p-8 rounded-lg max-w-2xl mx-auto">
+        <h2 class="font-['Libre_Baskerville'] text-5xl text-center text-gray-800 mb-6">RSVP</h2>
         <p class="text-center text-gray-600 mb-8">Please let us know if you can make it by [RSVP Deadline].</p>
         <form id="rsvp-form">
             <div class="space-y-6">
                 <div>
                     <label for="names" class="block text-sm font-medium text-gray-700 mb-1">Full Name(s)</label>
-                    <input type="text" id="names" name="names" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-rose-500 focus:border-rose-500">
+                    <input type="text" id="names" name="names" required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-rose-500 focus:border-rose-500">
                 </div>
                 <div>
                     <span class="block text-sm font-medium text-gray-700 mb-2">Will you be attending?</span>
                     <div class="flex items-center space-x-6">
                         <label class="flex items-center">
-                            <input type="radio" name="attendance" value="yes" class="h-4 w-4 text-rose-600 border-gray-300 focus:ring-rose-500" required>
+                            <input type="radio" name="attendance" value="yes"
+                                class="h-4 w-4 text-rose-600 border-gray-300 focus:ring-rose-500" required>
                             <span class="ml-2">Joyfully Accept</span>
                         </label>
                         <label class="flex items-center">
-                            <input type="radio" name="attendance" value="no" class="h-4 w-4 text-rose-600 border-gray-300 focus:ring-rose-500">
+                            <input type="radio" name="attendance" value="no"
+                                class="h-4 w-4 text-rose-600 border-gray-300 focus:ring-rose-500">
                             <span class="ml-2">Regretfully Decline</span>
                         </label>
                     </div>
                 </div>
                 <div>
-                    <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Leave a message for the couple (optional)</label>
-                    <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-rose-500 focus:border-rose-500"></textarea>
+                    <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Leave a message for the
+                        couple (optional)</label>
+                    <textarea id="message" name="message" rows="4"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-rose-500 focus:border-rose-500"></textarea>
                 </div>
             </div>
             <div class="text-center mt-8">
-                <button type="submit" class="bg-rose-600 text-white font-bold px-8 py-3 rounded-full hover:bg-rose-700 transition-transform transform hover:scale-105 duration-300">
+                <button type="submit"
+                    class="bg-rose-600 text-white font-bold px-8 py-3 rounded-full hover:bg-rose-700 transition-transform transform hover:scale-105 duration-300">
                     Submit RSVP
                 </button>
             </div>
