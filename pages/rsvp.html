@@ -35,7 +35,8 @@
 
     <!-- Important Notes Section -->
     <div class="bg-[#ebe8e1] p-6 rounded-lg mb-8 max-w-2xl mx-auto">
-        <h2 class="font-['Libre_Baskerville'] text-lg sm:text-2xl md:text-3xl text-center text-gray-800 mb-6">IMPORTANT NOTE</h2>
+        <h2 class="font-['Libre_Baskerville'] text-lg sm:text-2xl md:text-3xl text-center text-gray-800 mb-6">IMPORTANT
+            NOTE</h2>
         <div class="text-center text-[#482127] space-y-2">
             <div class="text-left font-['Libre_Baskerville']">
                 <p class="font-bold underline mb-2">Time Etiquette</p>
@@ -68,36 +69,101 @@
 
     <div class="page-content bg-[#ebe8e1] backdrop-blur-sm p-8 rounded-lg max-w-2xl mx-auto">
         <h2 class="font-['Libre_Baskerville'] text-5xl text-center text-gray-800 mb-6">RSVP</h2>
-        <p class="text-center text-gray-600 mb-8">Please let us know if you can make it by [RSVP Deadline].</p>
+        <p class="text-center text-gray-600 mb-8">
+            Please let us know if you can make it by [RSVP Deadline].
+        </p>
+
         <form id="rsvp-form">
             <div class="space-y-6">
+                <!-- Name -->
                 <div>
-                    <label for="names" class="block text-sm font-medium text-gray-700 mb-1">Full Name(s)</label>
+                    <label for="names" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
                     <input type="text" id="names" name="names" required
                         class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-rose-500 focus:border-rose-500">
                 </div>
+
+                <!-- Contact number -->
+                <div>
+                    <label for="contact" class="block text-sm font-medium text-gray-700 mb-1">Contact number</label>
+                    <input type="text" id="contact" name="contact" required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-rose-500 focus:border-rose-500">
+                </div>
+
+                <!-- Attendance -->
                 <div>
                     <span class="block text-sm font-medium text-gray-700 mb-2">Will you be attending?</span>
-                    <div class="flex items-center space-x-6">
+                    <div class="space-y-2">
                         <label class="flex items-center">
                             <input type="radio" name="attendance" value="yes"
                                 class="h-4 w-4 text-rose-600 border-gray-300 focus:ring-rose-500" required>
-                            <span class="ml-2">Joyfully Accept</span>
+                            <span class="ml-2">I will be delighted to attend the wedding</span>
                         </label>
                         <label class="flex items-center">
                             <input type="radio" name="attendance" value="no"
                                 class="h-4 w-4 text-rose-600 border-gray-300 focus:ring-rose-500">
-                            <span class="ml-2">Regretfully Decline</span>
+                            <span class="ml-2">I regret that I am unable to attend</span>
                         </label>
                     </div>
                 </div>
-                <div>
-                    <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Leave a message for the
-                        couple (optional)</label>
-                    <textarea id="message" name="message" rows="4"
-                        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-rose-500 focus:border-rose-500"></textarea>
+
+                <!-- Extra fields for YES -->
+                <div id="attending-fields" class="hidden space-y-6">
+                    <!-- Number of guests -->
+                    <div>
+                        <label for="num-guests" class="block text-sm font-medium text-gray-700 mb-1">
+                            Number of guests in your group
+                        </label>
+                        <input type="number" id="num-guests" name="num-guests" min="1" max="10"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-rose-500 focus:border-rose-500">
+                    </div>
+
+                    <!-- Guest list will be auto-generated here -->
+                    <div id="guest-list" class="space-y-4"></div>
+
+                    <!-- Shuttle bus -->
+                    <div>
+                        <span class="block text-sm font-medium text-gray-700 mb-1">
+                            Will you be using the shuttle bus service from St. Mary’s Cathedral to Concorde Hotel for
+                            the lunch reception?
+                        </span>
+                        <div class="flex items-center space-x-6">
+                            <label class="flex items-center">
+                                <input type="radio" name="shuttle" value="yes"
+                                    class="h-4 w-4 text-rose-600 border-gray-300 focus:ring-rose-500">
+                                <span class="ml-2">Yes</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="shuttle" value="no"
+                                    class="h-4 w-4 text-rose-600 border-gray-300 focus:ring-rose-500">
+                                <span class="ml-2">No</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Extra fields for NO -->
+                <div id="not-attending-fields" class="hidden space-y-6">
+                    <div>
+                        <span class="block text-sm font-medium text-gray-700 mb-1">
+                            Would you like to join us via livestream?
+                        </span>
+                        <div class="flex items-center space-x-6">
+                            <label class="flex items-center">
+                                <input type="radio" name="livestream" value="yes"
+                                    class="h-4 w-4 text-rose-600 border-gray-300 focus:ring-rose-500">
+                                <span class="ml-2">Yes</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="livestream" value="no"
+                                    class="h-4 w-4 text-rose-600 border-gray-300 focus:ring-rose-500">
+                                <span class="ml-2">No</span>
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <!-- Submit -->
             <div class="text-center mt-8">
                 <button type="submit"
                     class="bg-rose-600 text-white font-bold px-8 py-3 rounded-full hover:bg-rose-700 transition-transform transform hover:scale-105 duration-300">
@@ -105,6 +171,7 @@
                 </button>
             </div>
         </form>
+
         <div id="rsvp-confirmation" class="hidden text-center mt-8 p-4 bg-green-100 text-green-800 rounded-md">
             Thank you for your response! We can't wait to celebrate with you.
         </div>

@@ -27,12 +27,90 @@ function attachRsvpFormHandler() {
     const confirmationMessage = document.getElementById('rsvp-confirmation');
     const submitButton = rsvpForm?.querySelector('button[type="submit"]');
 
+    const attendingFields = document.getElementById('attending-fields');
+    const notAttendingFields = document.getElementById('not-attending-fields');
+    const numGuestsInput = document.getElementById('num-guests');
+    const guestListDiv = document.getElementById('guest-list');
+    const nameInput = document.getElementById('names');
+
     if (!rsvpForm || !submitButton) return;
 
+    // Toggle sections based on attendance choice
+    rsvpForm.addEventListener('change', function(event) {
+        if (event.target.name === 'attendance') {
+            if (event.target.value === 'yes') {
+                attendingFields.classList.remove('hidden');
+                notAttendingFields.classList.add('hidden');
+            } else {
+                attendingFields.classList.add('hidden');
+                notAttendingFields.classList.remove('hidden');
+            }
+        }
+    });
+
+    // Generate guest fields dynamically
+    numGuestsInput?.addEventListener('input', function() {
+        const num = parseInt(numGuestsInput.value, 10) || 0;
+        guestListDiv.innerHTML = ''; // Clear old fields
+
+        for (let i = 1; i <= num; i++) {
+            const guestDiv = document.createElement('div');
+            guestDiv.className = "space-y-2 border border-gray-200 rounded-md p-3 bg-white";
+
+            // Guest name
+            const nameLabel = document.createElement('label');
+            nameLabel.className = "block text-sm font-medium text-gray-700";
+            nameLabel.textContent = `Guest name ${i}`;
+            const nameField = document.createElement('input');
+            nameField.type = "text";
+            nameField.name = `guest_name_${i}`;
+            nameField.required = true;
+            nameField.className = "w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-rose-500 focus:border-rose-500";
+
+            // Auto-copy first guest
+            if (i === 1 && nameInput.value) {
+                nameField.value = nameInput.value;
+            }
+
+            guestDiv.appendChild(nameLabel);
+            guestDiv.appendChild(nameField);
+
+            // Relationship dropdown only for Guest 2+
+            if (i > 1) {
+                const relLabel = document.createElement('label');
+                relLabel.className = "block text-sm font-medium text-gray-700 mt-2";
+                relLabel.textContent = "Relationship";
+                const relSelect = document.createElement('select');
+                relSelect.name = `guest_relationship_${i}`;
+                relSelect.className = "w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-rose-500 focus:border-rose-500";
+                ["Spouse","Children","Parents","Partner","Friend"].forEach(opt => {
+                    const option = document.createElement('option');
+                    option.value = opt.toLowerCase();
+                    option.textContent = opt;
+                    relSelect.appendChild(option);
+                });
+
+                guestDiv.appendChild(relLabel);
+                guestDiv.appendChild(relSelect);
+            }
+
+            guestListDiv.appendChild(guestDiv);
+        }
+    });
+
+    // Keep "Guest 1" synced with main Name
+    nameInput?.addEventListener('input', () => {
+        const firstGuestInput = guestListDiv.querySelector('input[name="guest_name_1"]');
+        if (firstGuestInput) {
+            firstGuestInput.value = nameInput.value;
+        }
+    });
+
+    // Form submit logic
     rsvpForm.addEventListener('submit', async function(event) {
         event.preventDefault();
 
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbycvufhMJUPCMWZwGuD1-I2JHY6NbHlC7SfXOeTsu1RyNZpkwuqtsrZh4BOHWrucSRL_A/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycby45p38Im9KC_elBBXhj9C3mjPRVKLNmlPIKJ5H4u4tBVytjp3FP8KxhkilL6rOPyUE-Q/exec';
         const formData = new FormData(rsvpForm);
         
         submitButton.disabled = true;
@@ -66,6 +144,9 @@ function attachRsvpFormHandler() {
         }
     });
 }
+
+// Call it on page load
+document.addEventListener('DOMContentLoaded', attachRsvpFormHandler);
 
 // --- Router and Navigation ---
 let currentPage = 'home';
@@ -132,10 +213,8 @@ async function loadPage(pageName) {
         // Use setTimeout to ensure any pending DOM updates are complete
         setTimeout(() => {
             try {
-                if (currentPage === 'home') {
-                    scrollToTop();
-                }
-                // Removed auto-scrolling for RSVP and other pages
+                // Scroll to top for all page navigations to show the full page content
+                scrollToTop();
             } catch (error) {
                 console.error('Error during scroll handling:', error);
                 // Fallback: do nothing instead of auto-scrolling
