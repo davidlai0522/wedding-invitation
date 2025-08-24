@@ -22,6 +22,7 @@ async function loadPageContent(pageName) {
 }
 
 // --- RSVP Form Handler ---
+// --- RSVP Form Handler ---
 function attachRsvpFormHandler() {
     const rsvpForm = document.getElementById('rsvp-form');
     const confirmationMessage = document.getElementById('rsvp-confirmation');
@@ -49,13 +50,13 @@ function attachRsvpFormHandler() {
     });
 
     // Generate guest fields dynamically
-    numGuestsInput?.addEventListener('input', function() {
+    numGuestsInput?.addEventListener('change', function() {
         const num = parseInt(numGuestsInput.value, 10) || 0;
         guestListDiv.innerHTML = ''; // Clear old fields
 
         for (let i = 1; i <= num; i++) {
             const guestDiv = document.createElement('div');
-            guestDiv.className = "space-y-2 border border-gray-200 rounded-md p-3 bg-white";
+            guestDiv.className = "space-y-2 border border-[#482127] rounded-md p-3 bg-[#ebe8e1]";
 
             // Guest name
             const nameLabel = document.createElement('label');
@@ -75,6 +76,41 @@ function attachRsvpFormHandler() {
             guestDiv.appendChild(nameLabel);
             guestDiv.appendChild(nameField);
 
+            // Dietary restrictions dropdown
+            const dietLabel = document.createElement('label');
+            dietLabel.className = "block text-sm font-medium text-gray-700 mt-2";
+            dietLabel.textContent = "Dietary Restriction";
+            const dietSelect = document.createElement('select');
+            dietSelect.name = `guest_diet_${i}`;
+            dietSelect.className = "w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-rose-500 focus:border-rose-500";
+            ["None","Halal (no pork)","No beef","No seafood","Vegetarian","Others"].forEach(opt => {
+                const option = document.createElement('option');
+                option.value = opt.toLowerCase().replace(/\s+/g, "_"); 
+                option.textContent = opt;
+                dietSelect.appendChild(option);
+            });
+            guestDiv.appendChild(dietLabel);
+            guestDiv.appendChild(dietSelect);
+
+            // Hidden textbox for "Others"
+            const dietOtherInput = document.createElement('input');
+            dietOtherInput.type = "text";
+            dietOtherInput.name = `guest_diet_other_${i}`;
+            dietOtherInput.placeholder = "Please specify";
+            dietOtherInput.className = "w-full px-3 py-2 border border-gray-300 rounded-md mt-2 hidden focus:ring-rose-500 focus:border-rose-500";
+            guestDiv.appendChild(dietOtherInput);
+
+            // Toggle textbox if "Others" is selected
+            dietSelect.addEventListener('change', () => {
+                if (dietSelect.value === "others") {
+                    dietOtherInput.classList.remove('hidden');
+                    dietOtherInput.required = true;
+                } else {
+                    dietOtherInput.classList.add('hidden');
+                    dietOtherInput.required = false;
+                }
+            });
+
             // Relationship dropdown only for Guest 2+
             if (i > 1) {
                 const relLabel = document.createElement('label');
@@ -89,7 +125,6 @@ function attachRsvpFormHandler() {
                     option.textContent = opt;
                     relSelect.appendChild(option);
                 });
-
                 guestDiv.appendChild(relLabel);
                 guestDiv.appendChild(relSelect);
             }
@@ -110,7 +145,7 @@ function attachRsvpFormHandler() {
     rsvpForm.addEventListener('submit', async function(event) {
         event.preventDefault();
 
-        const scriptURL = 'https://script.google.com/macros/s/AKfycby45p38Im9KC_elBBXhj9C3mjPRVKLNmlPIKJ5H4u4tBVytjp3FP8KxhkilL6rOPyUE-Q/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbz5sI4Y3gcgJ9xvb6qvwphVdZz7yajLGp4GuGv-LHkBZ3NG3OxKtKtnr6zGU_Uzc-OpZg/exec';
         const formData = new FormData(rsvpForm);
         
         submitButton.disabled = true;
@@ -144,6 +179,129 @@ function attachRsvpFormHandler() {
         }
     });
 }
+
+// function attachRsvpFormHandler() {
+//     const rsvpForm = document.getElementById('rsvp-form');
+//     const confirmationMessage = document.getElementById('rsvp-confirmation');
+//     const submitButton = rsvpForm?.querySelector('button[type="submit"]');
+
+//     const attendingFields = document.getElementById('attending-fields');
+//     const notAttendingFields = document.getElementById('not-attending-fields');
+//     const numGuestsInput = document.getElementById('num-guests');
+//     const guestListDiv = document.getElementById('guest-list');
+//     const nameInput = document.getElementById('names');
+
+//     if (!rsvpForm || !submitButton) return;
+
+//     // Toggle sections based on attendance choice
+//     rsvpForm.addEventListener('change', function(event) {
+//         if (event.target.name === 'attendance') {
+//             if (event.target.value === 'yes') {
+//                 attendingFields.classList.remove('hidden');
+//                 notAttendingFields.classList.add('hidden');
+//             } else {
+//                 attendingFields.classList.add('hidden');
+//                 notAttendingFields.classList.remove('hidden');
+//             }
+//         }
+//     });
+
+//     // Generate guest fields dynamically
+//     numGuestsInput?.addEventListener('change', function() {
+//         const num = parseInt(numGuestsInput.value, 10) || 0;
+//         guestListDiv.innerHTML = ''; // Clear old fields
+
+//         for (let i = 1; i <= num; i++) {
+//             const guestDiv = document.createElement('div');
+//             guestDiv.className = "space-y-2 border border-[#482127] rounded-md p-3 bg-[#ebe8e1]";
+
+//             // Guest name
+//             const nameLabel = document.createElement('label');
+//             nameLabel.className = "block text-sm font-medium text-gray-700";
+//             nameLabel.textContent = `Guest name ${i}`;
+//             const nameField = document.createElement('input');
+//             nameField.type = "text";
+//             nameField.name = `guest_name_${i}`;
+//             nameField.required = true;
+//             nameField.className = "w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-rose-500 focus:border-rose-500";
+
+//             // Auto-copy first guest
+//             if (i === 1 && nameInput.value) {
+//                 nameField.value = nameInput.value;
+//             }
+
+//             guestDiv.appendChild(nameLabel);
+//             guestDiv.appendChild(nameField);
+
+//             // Relationship dropdown only for Guest 2+
+//             if (i > 1) {
+//                 const relLabel = document.createElement('label');
+//                 relLabel.className = "block text-sm font-medium text-gray-700 mt-2";
+//                 relLabel.textContent = "Relationship";
+//                 const relSelect = document.createElement('select');
+//                 relSelect.name = `guest_relationship_${i}`;
+//                 relSelect.className = "w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-rose-500 focus:border-rose-500";
+//                 ["Spouse","Children","Parents","Partner","Friend"].forEach(opt => {
+//                     const option = document.createElement('option');
+//                     option.value = opt.toLowerCase();
+//                     option.textContent = opt;
+//                     relSelect.appendChild(option);
+//                 });
+
+//                 guestDiv.appendChild(relLabel);
+//                 guestDiv.appendChild(relSelect);
+//             }
+
+//             guestListDiv.appendChild(guestDiv);
+//         }
+//     });
+
+//     // Keep "Guest 1" synced with main Name
+//     nameInput?.addEventListener('input', () => {
+//         const firstGuestInput = guestListDiv.querySelector('input[name="guest_name_1"]');
+//         if (firstGuestInput) {
+//             firstGuestInput.value = nameInput.value;
+//         }
+//     });
+
+//     // Form submit logic
+//     rsvpForm.addEventListener('submit', async function(event) {
+//         event.preventDefault();
+
+//         const scriptURL = 'https://script.google.com/macros/s/AKfycby45p38Im9KC_elBBXhj9C3mjPRVKLNmlPIKJ5H4u4tBVytjp3FP8KxhkilL6rOPyUE-Q/exec';
+//         const formData = new FormData(rsvpForm);
+        
+//         submitButton.disabled = true;
+//         submitButton.textContent = 'Submitting...';
+
+//         try {
+//             const response = await fetch(scriptURL, { 
+//                 method: 'POST', 
+//                 body: formData 
+//             });
+//             const data = await response.json();
+            
+//             if (data.result === 'success') {
+//                 rsvpForm.style.display = 'none';
+//                 confirmationMessage.classList.remove('hidden');
+//             } else {
+//                 throw new Error(data.error || 'Unknown error from Google Script');
+//             }
+//         } catch (error) {
+//             console.error('Error!', error.message);
+//             submitButton.disabled = false;
+//             submitButton.textContent = 'Submit RSVP';
+            
+//             let errorMessageDiv = rsvpForm.querySelector('.error-message');
+//             if (!errorMessageDiv) {
+//                 errorMessageDiv = document.createElement('div');
+//                 errorMessageDiv.className = 'error-message text-center mt-4 p-4 bg-red-100 text-red-800 rounded-md';
+//                 rsvpForm.appendChild(errorMessageDiv);
+//             }
+//             errorMessageDiv.textContent = 'Oops! There was a problem submitting your RSVP. Please try again later.';
+//         }
+//     });
+// }
 
 // Call it on page load
 document.addEventListener('DOMContentLoaded', attachRsvpFormHandler);
