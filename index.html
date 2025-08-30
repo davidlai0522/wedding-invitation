@@ -24,8 +24,17 @@
         body {
             font-family: 'Lora', serif;
             background-color: #ebe8e1;
-            /* Beige background */
+            /* Beige background for mobile */
             scroll-behavior: smooth;
+        }
+
+        /* Two-color gradient background for desktop/tablet views only */
+        @media (min-width: 768px) {
+            body {
+                background: linear-gradient(135deg, #ffffff 0%, #e8ddd4 100%);
+                /* Soft beige to warm cream gradient */
+                min-height: 100vh;
+            }
         }
 
         h1,
