@@ -85,7 +85,17 @@ function attachRsvpFormHandler() {
             dietLabel.textContent = "Dietary Restriction";
             const dietSelect = document.createElement('select');
             dietSelect.name = `guest_diet_${i}`;
+            dietSelect.required = true;
             dietSelect.className = "w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-rose-500 focus:border-rose-500";
+            
+            // Add default "Please select" option
+            const defaultDietOption = document.createElement('option');
+            defaultDietOption.value = "";
+            defaultDietOption.textContent = "Please select";
+            defaultDietOption.disabled = true;
+            defaultDietOption.selected = true;
+            dietSelect.appendChild(defaultDietOption);
+            
             ["None", "No beef", "No seafood", "Vegetarian", "Others"].forEach(opt => {
                 const option = document.createElement('option');
                 option.value = opt.toLowerCase().replace(/\s+/g, "_"); 
@@ -127,7 +137,7 @@ function attachRsvpFormHandler() {
                 // Add default "Select" option
                 const defaultOption = document.createElement('option');
                 defaultOption.value = "";
-                defaultOption.textContent = "Select";
+                defaultOption.textContent = "Please select";
                 defaultOption.disabled = true;
                 defaultOption.selected = true;
                 relSelect.appendChild(defaultOption);
