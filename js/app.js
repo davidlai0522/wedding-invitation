@@ -66,11 +66,14 @@ function attachRsvpFormHandler() {
             nameField.type = "text";
             nameField.name = `guest_name_${i}`;
             nameField.required = true;
-            nameField.className = "w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-rose-500 focus:border-rose-500";
-
-            // Auto-copy first guest
-            if (i === 1 && nameInput.value) {
-                nameField.value = nameInput.value;
+            
+            // Lock first guest name field and make it read-only
+            if (i === 1) {
+                nameField.className = "w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-100 cursor-not-allowed";
+                nameField.readOnly = true;
+                nameField.value = nameInput.value || '';
+            } else {
+                nameField.className = "w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-rose-500 focus:border-rose-500";
             }
 
             guestDiv.appendChild(nameLabel);
@@ -118,7 +121,17 @@ function attachRsvpFormHandler() {
                 relLabel.textContent = "Relationship";
                 const relSelect = document.createElement('select');
                 relSelect.name = `guest_relationship_${i}`;
+                relSelect.required = true;
                 relSelect.className = "w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-rose-500 focus:border-rose-500";
+                
+                // Add default "Select" option
+                const defaultOption = document.createElement('option');
+                defaultOption.value = "";
+                defaultOption.textContent = "Select";
+                defaultOption.disabled = true;
+                defaultOption.selected = true;
+                relSelect.appendChild(defaultOption);
+                
                 ["Spouse","Child","Parent","Partner","Friend"].forEach(opt => {
                     const option = document.createElement('option');
                     option.value = opt.toLowerCase();
